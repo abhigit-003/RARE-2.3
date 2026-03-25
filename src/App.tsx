@@ -1,25 +1,37 @@
 import { createBrowserRouter, RouterProvider, Outlet, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { Toaster } from 'sonner'
+import { AuthProvider } from '@/context/AuthContext'
 import { CartProvider } from '@/context/CartContext'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { CustomCursor } from '@/components/ui'
-import HomePage from '@/pages/HomePage'
-import ServicesPage from '@/pages/ServicesPage'
-import ShopPage from '@/pages/ShopPage'
-import ProductDetailPage from '@/pages/ProductDetailPage'
-import MishtiPage from '@/pages/MishtiPage'
-import JournalPage from '@/pages/JournalPage'
-import DashboardPage from '@/pages/DashboardPage'
-import CartPage from '@/pages/CartPage'
-import CheckoutPage from '@/pages/CheckoutPage'
-import LoginPage from '@/pages/LoginPage'
-import SignupPage from '@/pages/SignupPage'
+import { ProtectedRoute } from '@/components/auth/ProtectedRoute'
 
-const queryClient = new QueryClient()
+// ── Lazy Pages ──────────────────────────────────────────────────────────────────
+const HomePage          = lazy(() => import('@/pages/HomePage'))
+const ServicesPage      = lazy(() => import('@/pages/ServicesPage'))
+const ShopPage          = lazy(() => import('@/pages/ShopPage'))
+const ProductDetailPage = lazy(() => import('@/pages/ProductDetailPage'))
+const MishtiPage        = lazy(() => import('@/pages/MishtiPage'))
+const JournalPage       = lazy(() => import('@/pages/JournalPage'))
+const DashboardPage     = lazy(() => import('@/pages/DashboardPage'))
+const CartPage          = lazy(() => import('@/pages/CartPage'))
+const CheckoutPage      = lazy(() => import('@/pages/CheckoutPage'))
+const LoginPage         = lazy(() => import('@/pages/LoginPage'))
+const SignupPage        = lazy(() => import('@/pages/RegisterPage'))
+const NotFoundPage      = lazy(() => import('@/pages/NotFoundPage'))
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 30,    // 30 minutes
+    },
+  },
+})
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -29,6 +41,14 @@ function ScrollToTop() {
   return null
 }
 
+function PageLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-cream">
+      <div className="w-12 h-12 border-2 border-gold/20 border-t-gold rounded-full animate-spin" />
+    </div>
+  )
+}
+
 function RootLayout() {
   return (
     <div className="min-h-screen flex flex-col bg-cream text-dark">
@@ -36,7 +56,9 @@ function RootLayout() {
       <ScrollToTop />
       <Navbar />
       <main className="flex-1">
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </main>
       <Footer />
     </div>
@@ -54,12 +76,26 @@ const router = createBrowserRouter([
       { path: 'shop/:id', element: <ProductDetailPage /> },
       { path: 'mishti', element: <MishtiPage /> },
       { path: 'journal', element: <JournalPage /> },
-      { path: 'dashboard', element: <DashboardPage /> },
       { path: 'cart', element: <CartPage /> },
-      { path: 'checkout', element: <CheckoutPage /> },
+      { 
+        path: 'dashboard', 
+        element: (
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        ) 
+      },
+      { 
+        path: 'checkout', 
+        element: (
+          <ProtectedRoute>
+            <CheckoutPage />
+          </ProtectedRoute>
+        ) 
+      },
       { path: 'login', element: <LoginPage /> },
       { path: 'signup', element: <SignupPage /> },
-      { path: '*', element: <HomePage /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ])
@@ -67,12 +103,14 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <CartProvider>
-          <RouterProvider router={router} />
-          <Toaster position="top-center" richColors />
-        </CartProvider>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <CartProvider>
+            <RouterProvider router={router} />
+            <Toaster position="top-center" richColors />
+          </CartProvider>
+        </TooltipProvider>
+      </AuthProvider>
     </QueryClientProvider>
   )
 }

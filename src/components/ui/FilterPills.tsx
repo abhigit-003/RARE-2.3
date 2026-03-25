@@ -15,8 +15,8 @@ export function FilterPills({ options, active, onChange }: FilterPillsProps) {
           key={option}
           onClick={() => onChange(option)}
           className={cn(
-            'relative px-6 py-2 text-[10px] uppercase tracking-[2px] font-medium transition-colors duration-300 whitespace-nowrap',
-            active === option ? 'text-cream' : 'text-dark/60 hover:text-dark'
+            'relative px-6 py-2 text-[10px] uppercase tracking-[2px] font-medium transition-colors duration-300 whitespace-nowrap rounded-full',
+            active === option ? 'text-cream' : 'text-dark/60 hover:text-dark bg-linen'
           )}
         >
           {active === option && (

@@ -5,6 +5,7 @@ import { useServices } from '@/hooks/useServices'
 import { useProducts } from '@/hooks/useProducts'
 import useEmblaCarousel from 'embla-carousel-react'
 import { ChevronRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
 import type { Testimonial } from '@/types'
 
 const TESTIMONIALS: Testimonial[] = [
@@ -148,45 +149,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Products ── */}
-      <section className="bg-cream py-32 px-6 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <ScrollReveal>
-            <div className="flex justify-between items-end mb-16">
-              <div>
-                <SectionLabel text="The Edit" />
-                <h2 className="text-dark text-4xl font-playfair font-light">
-                  Premium <em className="text-rose italic">Essentials</em>
-                </h2>
-              </div>
-              <Link to="/shop" className="text-mauve text-[10px] tracking-widest uppercase hover:text-rose transition-colors pb-2">
-                Shop the Collection →
-              </Link>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[400px]">
-            {isLoadingProducts ? (
-              <div className="col-span-full flex items-center justify-center">
-                <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin" />
-              </div>
-            ) : (
-              featuredProducts.map((p) => (
-                <ScrollReveal key={p.id}>
-                  <div onClick={() => navigate(`/shop?id=${p.id}`)} className="group cursor-pointer">
-                    <div className="relative overflow-hidden aspect-[3/4] mb-6 shadow-sm">
-                      <OptimizedImage src={p.image} alt={p.name} zoom className="w-full h-full" />
-                    </div>
-                    <p className="text-gold text-[9px] tracking-widest uppercase mb-1">{p.brand}</p>
-                    <h3 className="text-dark text-lg font-playfair mb-1 group-hover:text-rose transition-colors">{p.name}</h3>
-                    <p className="text-mauve font-light">₹{p.price}</p>
-                  </div>
-                </ScrollReveal>
-              ))
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* ── Aroma Section ── */}
       <section className="bg-linen py-32 px-6 lg:px-20 overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-20 items-center">
@@ -251,6 +213,45 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Products ── */}
+      <section className="bg-cream py-32 px-6 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="flex justify-between items-end mb-16">
+              <div>
+                <SectionLabel text="The Edit" />
+                <h2 className="text-dark text-4xl font-playfair font-light">
+                  Premium <em className="text-rose italic">Essentials</em>
+                </h2>
+              </div>
+              <Link to="/shop" className="text-mauve text-[10px] tracking-widest uppercase hover:text-rose transition-colors pb-2">
+                Shop the Collection →
+              </Link>
+            </div>
+          </ScrollReveal>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 min-h-[400px]">
+            {isLoadingProducts ? (
+              <div className="col-span-full flex items-center justify-center">
+                <div className="w-10 h-10 border-2 border-gold/20 border-t-gold rounded-full animate-spin" />
+              </div>
+            ) : (
+              featuredProducts.map((p) => (
+                <ScrollReveal key={p.id}>
+                  <div onClick={() => navigate(`/shop?id=${p.id}`)} className="group cursor-pointer">
+                    <div className="relative overflow-hidden aspect-[3/4] mb-6 shadow-sm">
+                      <OptimizedImage src={p.image} alt={p.name} zoom className="w-full h-full" />
+                    </div>
+                    <p className="text-gold text-[9px] tracking-widest uppercase mb-1">{p.brand}</p>
+                    <h3 className="text-dark text-lg font-playfair mb-1 group-hover:text-rose transition-colors">{p.name}</h3>
+                    <p className="text-mauve font-light">₹{p.price}</p>
+                  </div>
+                </ScrollReveal>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* ── About Philosophy ── */}
       <section className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
         <ScrollReveal direction="left" distance={100} width="100%">
@@ -306,6 +307,60 @@ export default function HomePage() {
               </motion.div>
             </ScrollReveal>
           ))}
+        </div>
+      </section>
+
+      {/* ── Membership ── */}
+      <section className="bg-dark py-32 px-6 lg:px-20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-rose/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="text-center mb-20">
+              <SectionLabel text="The Community" light />
+              <h2 className="text-cream text-4xl font-playfair font-light">The RARE <em className="text-rose italic">Membership</em></h2>
+              <p className="text-cream/40 text-sm mt-4 font-light max-w-lg mx-auto italic">Join a global lineage of individuals who prioritize intentional living and holistic wellness.</p>
+            </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { tier: 'Classic', price: 'Free', features: ['Early access to edits', 'Points on every purchase', 'Digital journal access', 'Community events'], accent: 'rose' },
+              { tier: 'VIP', price: '₹4,999/mo', features: ['Priority sanctuary booking', '24/7 Skin concierge', 'Quarterly discovery box', '15% off all products'], accent: 'gold', featured: true },
+              { tier: 'Elite', price: '₹14,999/mo', features: ['Complimentary retreat transfer', 'Daily custom skin ritual', 'Private sanctuary sessions', 'Lifetime legacy status'], accent: 'rose' },
+            ].map((m, i) => (
+              <ScrollReveal key={i} delay={i * 0.1}>
+                <div className={cn(
+                  "relative p-10 border transition-all duration-500 flex flex-col h-full group",
+                  m.featured 
+                    ? "bg-linen/5 border-gold shadow-[0_20px_50px_-15px_rgba(212,175,122,0.15)] scale-105 z-10" 
+                    : "bg-white/[0.02] border-white/10 hover:border-gold/30"
+                )}>
+                  {m.featured && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gold text-dark text-[9px] uppercase tracking-[3px] px-6 py-1.5 font-bold">Recommended</div>
+                  )}
+                  <div className="mb-8">
+                    <p className={cn("text-[10px] uppercase tracking-[4px] font-bold mb-2", m.accent === 'gold' ? 'text-gold' : 'text-rose')}>{m.tier}</p>
+                    <h3 className="text-cream text-3xl font-playfair">{m.price}</h3>
+                  </div>
+                  <ul className="space-y-6 mb-12 flex-1">
+                    {m.features.map((f, j) => (
+                      <li key={j} className="flex items-start gap-4 text-cream/60 text-[11px] uppercase tracking-widest font-light">
+                        <span className="w-1 h-1 rounded-full bg-gold mt-1.5 opacity-40" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <Button 
+                    variant={m.featured ? 'default' : 'outline-cream'} 
+                    className="w-full text-[10px] tracking-[4px]"
+                    onClick={() => navigate('/signup')}
+                  >
+                    Select {m.tier}
+                  </Button>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 

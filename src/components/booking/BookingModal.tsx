@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Calendar, Users, CheckCircle2, ArrowRight } from 'lucide-react'
+import { X, Calendar, CheckCircle2, ArrowRight } from 'lucide-react'
 import { Button, SectionLabel } from '@/components/ui'
 import { toast } from 'sonner'
 import { useBooking } from '@/hooks/useBooking'
@@ -15,6 +15,7 @@ export function BookingModal({ isOpen, onClose, serviceName }: BookingModalProps
   const [step, setStep] = useState(1)
   const [formData, setFormData] = useState({
     date: '',
+    time: '',
     guests: '1',
     name: '',
     email: '',
@@ -106,19 +107,29 @@ export function BookingModal({ isOpen, onClose, serviceName }: BookingModalProps
                       </div>
                     </div>
                     <div>
-                      <label className="block text-[10px] uppercase tracking-widest text-mauve mb-2">Number of Guests</label>
-                      <div className="relative">
-                        <Users className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gold" />
-                        <select 
-                          className="w-full bg-linen border-none p-4 pl-12 text-sm focus:ring-1 focus:ring-gold outline-none appearance-none cursor-pointer"
-                          value={formData.guests}
-                          onChange={e => setFormData({...formData, guests: e.target.value})}
-                        >
-                          {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n} {n === 1 ? 'Guest' : 'Guests'}</option>)}
-                        </select>
+                      <label className="block text-[10px] uppercase tracking-widest text-mauve mb-4">Select Time Slot</label>
+                      <div className="grid grid-cols-3 gap-2">
+                        {['10:00 AM', '11:00 AM', '12:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'].map((slot) => (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => setFormData({ ...formData, time: slot })}
+                            className={`py-3 px-2 text-[10px] tracking-widest transition-all rounded-sm border ${
+                              formData.time === slot
+                                ? 'bg-rose text-cream border-rose shadow-md'
+                                : 'bg-linen/30 text-mauve border-rose/10 hover:border-rose/30'
+                            }`}
+                          >
+                            {slot}
+                          </button>
+                        ))}
                       </div>
+                      {!formData.date || !formData.time ? (
+                        <p className="text-[9px] text-rose/60 mt-4 italic">Please select a date and time slot to proceed</p>
+                      ) : null}
                     </div>
-                    <Button onClick={handleNext} className="w-full" disabled={!formData.date}>
+
+                    <Button onClick={handleNext} className="w-full" disabled={!formData.date || !formData.time}>
                       Continue to Details <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </div>
@@ -136,7 +147,7 @@ export function BookingModal({ isOpen, onClose, serviceName }: BookingModalProps
                     <p className="text-[10px] uppercase tracking-widest text-mauve/60 mb-2">Reservation Summary</p>
                     <div className="flex justify-between items-end">
                       <p className="font-playfair text-dark italic">{serviceName}</p>
-                      <p className="text-xs text-gold font-light">{formData.date} • {formData.guests} {formData.guests === '1' ? 'Guest' : 'Guests'}</p>
+                      <p className="text-xs text-gold font-light">{formData.date} • {formData.time} • {formData.guests} {formData.guests === '1' ? 'Guest' : 'Guests'}</p>
                     </div>
                   </div>
 

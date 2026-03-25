@@ -94,7 +94,7 @@ export default function ProductDetailPage() {
               <div>
                 <label className="block text-[10px] uppercase tracking-widest text-mauve mb-4">Select Size</label>
                 <div className="flex gap-4">
-                  {['30ml', '50ml', '100ml'].map(size => (
+                  {['15ml', '30ml'].map(size => (
                     <button 
                       key={size}
                       onClick={() => setSelectedSize(size)}

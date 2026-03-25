@@ -11,11 +11,12 @@ RARE is a ultra-premium wellness platform designed for an immersive, ritualistic
 
 ## ✨ Key Features (v2.3 Sanctuary)
 - **🌍 Regional Localization**: Fully localized for the Indian market with **INR (₹)** pricing across the entire ecosystem.
-- **🛍️ Commerce Engine**: Integrated multi-step checkout flow (Shipping -> Payment) with secure Stripe integration.
+- **🎨 Premium Design System**: A warmer, Figma-aligned color palette (Cream, Linen, Gold, Rose, Dark) for an authentic luxury feel.
+- **🕒 Precision Booking**: Scheduling grid with 10 AM - 5 PM time slots and mandatory selection validation.
+- **📱 Hybrid Authentication**: Dual-method login supporting traditional Email/Password and modern Mobile/OTP (6-digit) verification.
+- **💎 VIP Membership**: Integrated tiered membership levels (Classic, VIP, Elite) to drive user engagement.
 - **🧬 Mishti AI Integration**: Personalization hooks that match products and services to your unique skin profile.
-- **💆 Sanctuary Booking**: Immersive scheduling for high-end boutique spa services.
-- **📔 Digital Journal**: Editorial content focused on the intersection of science and presence.
-- **⚡ Performance First**: Zero-regression build pipeline with strict TypeScript enforcement and Tailwind 4 optimization.
+- **⚡ Performance First**: Zero-regression build pipeline with strict TypeScript enforcement.
 
 ---
 

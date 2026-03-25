@@ -17,14 +17,14 @@ export function ProductCard({ product }: ProductCardProps) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group bg-linen/50 border border-dark/5 hover:border-gold/20 transition-all duration-500 hover:shadow-2xl"
+      whileHover={{ y: -10, scale: 1.05 }}
+      className="group bg-linen transition-all duration-500 hover:shadow-[0_8px_20px_rgba(46,26,26,0.12)]"
     >
       <div className="relative aspect-[3/4] overflow-hidden bg-cream">
         <Link to={`/shop/${product.id}`}>
           <OptimizedImage 
             src={product.image} 
             alt={product.name} 
-            zoom 
             className="w-full h-full" 
           />
         </Link>
@@ -50,17 +50,17 @@ export function ProductCard({ product }: ProductCardProps) {
         )}
       </div>
 
-      <div className="p-8">
+      <div className="p-6">
         <p className="text-gold text-[9px] uppercase tracking-[3px] font-medium mb-1.5">{product.brand}</p>
         <Link to={`/shop/${product.id}`}>
-          <h4 className="font-playfair text-lg text-dark mb-2 group-hover:text-rose transition-colors duration-300 min-h-[56px] leading-tight">
+          <h4 className="font-jost text-lg text-dark mb-2 group-hover:text-rose transition-colors duration-300 min-h-[56px] leading-tight">
             {product.name}
           </h4>
         </Link>
         <StarRating rating={product.rating} showNumber={false} className="mb-6 opacity-60" />
         
         <div className="flex items-center justify-between pt-6 border-t border-dark/5">
-          <p className="text-xl font-playfair text-dark/80">₹{product.price}</p>
+          <p className="text-xl font-cormorant text-dark/80 font-normal">₹{product.price}</p>
           <button 
             onClick={() => addItem(product, '30ml')}
             className="w-10 h-10 rounded-full bg-dark text-cream flex items-center justify-center hover:bg-rose transition-colors"

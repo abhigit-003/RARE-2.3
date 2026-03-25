@@ -45,7 +45,7 @@ export default function ShopPage() {
             <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
               <div className="max-w-md">
                 <p className="text-gold text-[10px] tracking-[5px] uppercase mb-4">Mishti Personalization</p>
-                <h3 className="text-cream text-2xl font-playfair mb-4 italic">Tailored to Your Analysis</h3>
+                <h3 className="text-cream text-2xl font-jost uppercase tracking-widest mb-4 italic">Tailored to Your Analysis</h3>
                 <p className="text-cream/50 text-sm font-light leading-relaxed">
                   Products marked with a match percentage are curated specifically for your skin profile based on your latest Mishti scan.
                 </p>
@@ -98,7 +98,7 @@ export default function ShopPage() {
               <p className="text-rose font-playfair italic">Failed to load the collection. Please try again.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <AnimatePresence mode="popLayout">
                 {filteredProducts.map((product, index) => (
                   <ScrollReveal key={product.id} delay={index * 0.1}>

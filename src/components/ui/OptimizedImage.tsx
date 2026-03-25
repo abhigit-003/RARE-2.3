@@ -26,6 +26,7 @@ export function OptimizedImage({ src, alt, className, zoom = false }: OptimizedI
       <motion.img
         src={src}
         alt={alt}
+        loading="lazy"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoaded ? 1 : 0 }}
         transition={{ duration: 0.6 }}

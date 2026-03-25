@@ -4,7 +4,17 @@ import { useNavigate } from 'react-router-dom'
 import { Camera, Zap, Sparkles, Fingerprint, Layers } from 'lucide-react'
 import { Button, Tag, PageHeader } from '@/components/ui'
 import { ProductCard } from '@/components/shop/ProductCard'
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts'
 import type { Product } from '@/types'
+
+const SCAN_DATA = [
+  { subject: 'Hydration', A: 78, fullMark: 100 },
+  { subject: 'Elasticity', A: 64, fullMark: 100 },
+  { subject: 'Clarity', A: 92, fullMark: 100 },
+  { subject: 'Sensitivity', A: 22, fullMark: 100 },
+  { subject: 'Texture', A: 85, fullMark: 100 },
+  { subject: 'Tone', A: 70, fullMark: 100 },
+]
 
 const STEPS = ['intro', 'scanning', 'analyzing', 'results'] as const
 type Step = typeof STEPS[number]
@@ -162,29 +172,26 @@ export default function MishtiPage() {
                     <h1 className="font-playfair text-5xl text-dark leading-tight">Your Skin <em className='text-rose italic'>DNA</em></h1>
                   </div>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {[
-                      { label: "Hydration", val: "78%", status: "Good", color: "bg-gold" },
-                      { label: "Elasticity", val: "64%", status: "Needs Care", color: "bg-rose" },
-                      { label: "Clarity", val: "92%", status: "Excellent", color: "bg-dark" },
-                      { label: "Sensitivity", val: "22%", status: "Low", color: "bg-mauve" }
-                    ].map(stat => (
-                      <div key={stat.label} className="bg-linen p-8 border border-dark/5 shadow-sm">
-                        <div className="flex justify-between items-start mb-6">
-                          <p className="text-[10px] uppercase tracking-widest text-mauve font-medium">{stat.label}</p>
-                          <span className={`px-2 py-1 text-[8px] uppercase tracking-widest text-cream rounded-full ${stat.color}`}>{stat.status}</span>
-                        </div>
-                        <p className="text-4xl font-playfair text-dark mb-4">{stat.val}</p>
-                        <div className="w-full h-1 bg-dark/5 rounded-full overflow-hidden">
-                          <motion.div 
-                            initial={{ width: 0 }}
-                            animate={{ width: stat.val }}
-                            transition={{ duration: 1, delay: 0.5 }}
-                            className={`h-full ${stat.color}`}
-                          />
-                        </div>
-                      </div>
-                    ))}
+                  <div className="h-[400px] w-full bg-linen p-8 border border-dark/5 shadow-sm relative overflow-hidden">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={SCAN_DATA}>
+                        <PolarGrid stroke="#2e1a1a" opacity={0.1} />
+                        <PolarAngleAxis dataKey="subject" tick={{ fill: '#7a4a4a', fontSize: 10, letterSpacing: '2px' }} />
+                        <Radar
+                          name="Skin Profile"
+                          dataKey="A"
+                          stroke="#d4af7a"
+                          fill="#d4af7a"
+                          fillOpacity={0.6}
+                        />
+                      </RadarChart>
+                    </ResponsiveContainer>
+                    <div className="absolute top-8 right-8 flex flex-col gap-2">
+                       <div className="flex items-center gap-2">
+                          <div className="w-3 h-3 bg-gold rounded-full" />
+                          <span className="text-[10px] uppercase tracking-widest text-dark font-medium">Optimal</span>
+                       </div>
+                    </div>
                   </div>
                 </div>
 

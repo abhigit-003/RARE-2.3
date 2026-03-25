@@ -60,6 +60,17 @@ export const mockApi = {
         points: 2450
       }
     },
+    loginWithMobile: async (phone: string, otp: string): Promise<User> => {
+      await delay(1500)
+      if (otp !== '123456') throw new Error('Invalid OTP')
+      return {
+        id: 'u3',
+        name: 'Mobile User',
+        email: `${phone}@rare-mobile.com`,
+        membership: 'Classic',
+        points: 50
+      }
+    },
     signup: async (credentials: SignupCredentials): Promise<User> => {
       await delay(2000)
       return {

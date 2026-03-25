@@ -5,13 +5,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: '#1e1e1e',
-        cream: '#f5f0e8',
-        linen: '#ede8de',
-        rose: '#c8856a',
-        gold: '#b8975a',
-        mauve: '#8c7b75',
+        dark: '#2e1a1a',
+        cream: '#faf4ee',
+        linen: '#f2ddd5',
+        rose: '#c9897a',
+        gold: '#d4af7a',
+        mauve: '#7a4a4a',
         muted: '#a09890',
+        terra: '#a4594a',
       },
       fontFamily: {
         playfair: ['"Playfair Display"', 'serif'],

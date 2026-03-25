@@ -31,8 +31,8 @@ export function Footer() {
           {/* Brand Blurb */}
           <div className="flex flex-col items-center md:items-start space-y-6">
             <Link to="/" className="inline-block transition-transform duration-500 hover:scale-105">
-              <span className="font-playfair italic text-3xl text-gold tracking-widest">
-                RARE<sup className="text-xs ml-0.5">•</sup>
+              <span className="font-playfair text-3xl text-gold tracking-[0.3em] font-light">
+                R<span className="text-rose">A</span>RE<sup className="text-xs ml-0.5">•</sup>
               </span>
             </Link>
             <p className="text-muted text-sm leading-relaxed max-w-xs font-light">

@@ -4,6 +4,7 @@ import { Instagram, Twitter, Facebook, Youtube } from 'lucide-react'
 const QUICK_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'Sanctuaries', to: '/services' },
+  { label: 'List Your Space', to: '/partner' },
   { label: 'The Edit', to: '/shop' },
   { label: 'Journal', to: '/journal' },
   { label: 'Skin Analysis', to: '/mishti' },

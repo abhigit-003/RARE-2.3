@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { Settings, LogOut, Package, Calendar, Award, Heart, Sparkles, ChevronRight, User, TrendingUp, BarChart3 } from 'lucide-react'
+import { Settings, LogOut, Package, Calendar, Award, Heart, Sparkles, ChevronRight, User, TrendingUp, BarChart3, Building2 } from 'lucide-react'
 import { Button, PageHeader } from '@/components/ui'
+import { PartnerOnboarding } from '@/components/PartnerOnboarding'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
@@ -32,6 +33,7 @@ const TABS = [
   { id: 'bookings', label: 'Bookings', icon: Calendar },
   { id: 'orders', label: 'Orders', icon: Package },
   { id: 'mishti', label: 'Mishti Scan', icon: Sparkles },
+  { id: 'partner', label: 'Partner With Us', icon: Building2 },
 ]
 
 export default function DashboardPage() {
@@ -236,6 +238,15 @@ export default function DashboardPage() {
                 <p className="text-mauve font-light mt-4 max-w-sm mx-auto">Maintain your daily ritual for the most accurate tracking of your progress.</p>
               </div>
               <Button variant="gold" onClick={() => navigate('/mishti')}>Start New Scan</Button>
+            </motion.div>
+          )}
+
+          {activeTab === 'partner' && (
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+              <div className="flex justify-between items-end mb-8">
+                <h3 className="font-playfair text-2xl text-dark italic">Partner Application</h3>
+              </div>
+              <PartnerOnboarding />
             </motion.div>
           )}
         </div>

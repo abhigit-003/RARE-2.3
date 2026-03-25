@@ -22,6 +22,7 @@ const CartPage          = lazy(() => import('@/pages/CartPage'))
 const CheckoutPage      = lazy(() => import('@/pages/CheckoutPage'))
 const LoginPage         = lazy(() => import('@/pages/LoginPage'))
 const SignupPage        = lazy(() => import('@/pages/RegisterPage'))
+const PartnerPage       = lazy(() => import('@/pages/PartnerPage'))
 const NotFoundPage      = lazy(() => import('@/pages/NotFoundPage'))
 
 const queryClient = new QueryClient({
@@ -95,6 +96,7 @@ const router = createBrowserRouter([
       },
       { path: 'login', element: <LoginPage /> },
       { path: 'signup', element: <SignupPage /> },
+      { path: 'partner', element: <PartnerPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

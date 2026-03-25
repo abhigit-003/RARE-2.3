@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Settings, LogOut, Package, Calendar, Award, Heart, Sparkles, ChevronRight, User, TrendingUp, BarChart3 } from 'lucide-react'
-import { Button, SectionLabel, PageHeader } from '@/components/ui'
+import { Button, PageHeader } from '@/components/ui'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import { useAuth } from '@/context/AuthContext'
 import { cn } from '@/lib/utils'
@@ -118,7 +118,7 @@ export default function DashboardPage() {
           {activeTab === 'overview' && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {dynamicStats.map((stat, i) => (
+                {dynamicStats.map((stat) => (
                   <div key={stat.label} className="bg-linen p-8 border border-dark/5 shadow-sm">
                     <div className="flex items-center gap-4 mb-6">
                       <stat.icon className="w-5 h-5 text-gold" />

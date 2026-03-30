@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Building2, Users, Star, TrendingUp, Shield, Check, 
   Sparkles, Scissors, Activity, MapPin, Calendar, 
-  Globe, Home, User, Phone, Mail, Upload 
+  Globe, Home, User, Phone, Mail, Upload, ShoppingBag
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
@@ -59,6 +59,22 @@ const PROVIDER_TYPES = [
     icon: MapPin,
     title: 'Retreat & Destination',
     description: 'Wellness retreats, resorts, travel experiences',
+  },
+  {
+    id: 'seller',
+    icon: ShoppingBag,
+    title: 'Product Seller',
+    description: 'Skincare, wellness products & supplements for The Edit',
+    route: '/partner/seller',
+    badge: 'NEW',
+  },
+  {
+    id: 'destination',
+    icon: Globe,
+    title: 'Luxury Destination',
+    description: 'International retreats, resorts & wellness travel',
+    route: '/partner/destination',
+    badge: 'NEW',
   },
 ]
 
@@ -302,6 +318,11 @@ export function PartnerOnboarding() {
                             : "border-linen hover:border-rose/30 bg-white shadow-sm hover:shadow-md"
                         )}
                       >
+                        {(type as any).badge && (
+                          <span className="absolute top-3 right-3 bg-rose text-cream text-[8px] uppercase tracking-widest px-2 py-1 z-10">
+                            {(type as any).badge}
+                          </span>
+                        )}
                         <div className={cn(
                           "w-12 h-12 flex items-center justify-center mb-6 transition-colors duration-500",
                           formData.providerType === type.id ? "bg-rose/10" : "bg-linen"
@@ -326,7 +347,14 @@ export function PartnerOnboarding() {
                   <div className="flex justify-end pt-8">
                     <button
                       disabled={!isStep1Valid}
-                      onClick={goNext}
+                      onClick={() => {
+                        const selected = PROVIDER_TYPES.find(p => p.id === formData.providerType);
+                        if (selected && (selected as any).route) {
+                          navigate((selected as any).route);
+                        } else {
+                          goNext();
+                        }
+                      }}
                       className={cn(
                         "px-12 py-4 text-[10px] uppercase tracking-[3px] font-medium transition-all duration-300",
                         isStep1Valid ? "bg-dark text-cream hover:bg-dark/90" : "bg-linen text-muted cursor-not-allowed"

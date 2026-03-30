@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { Settings, LogOut, Package, Calendar, Award, Heart, Sparkles, ChevronRight, User, TrendingUp, BarChart3, Building2 } from 'lucide-react'
+import { Settings, LogOut, Package, Calendar, Award, Heart, Sparkles, ChevronRight, User, TrendingUp, BarChart3, Building2, ShoppingBag, Globe } from 'lucide-react'
 import { Button, PageHeader } from '@/components/ui'
 import { PartnerOnboarding } from '@/components/PartnerOnboarding'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
@@ -246,6 +246,45 @@ export default function DashboardPage() {
               <div className="flex justify-between items-end mb-8">
                 <h3 className="font-playfair text-2xl text-dark italic">Partner Application</h3>
               </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <button
+                  onClick={() => navigate('/partner/seller')}
+                  className="bg-linen p-8 text-left hover:bg-rose/5 
+                             border border-transparent hover:border-rose/30 
+                             transition-all group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-rose/5 blur-2xl rounded-full translate-x-1/2 -translate-y-1/2" />
+                  <ShoppingBag className="w-8 h-8 text-gold mb-4 relative z-10" />
+                  <p className="font-playfair text-dark text-2xl font-light mb-2 relative z-10">
+                    Sell on <em className="text-rose italic">The Edit</em>
+                  </p>
+                  <p className="text-muted text-sm relative z-10 font-light">List your skincare & wellness products</p>
+                  <p className="text-[10px] uppercase tracking-widest text-rose mt-6 
+                                flex items-center gap-1 group-hover:gap-2 transition-all font-medium relative z-10">
+                    Apply Now →
+                  </p>
+                </button>
+
+                <button
+                  onClick={() => navigate('/partner/destination')}
+                  className="bg-linen p-8 text-left hover:bg-gold/5 
+                             border border-transparent hover:border-gold/30 
+                             transition-all group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gold/5 blur-2xl rounded-full translate-x-1/2 -translate-y-1/2" />
+                  <Globe className="w-8 h-8 text-rose mb-4 relative z-10" />
+                  <p className="font-playfair text-dark text-2xl font-light mb-2 relative z-10">
+                    List Your <em className="text-gold italic">Retreat</em>
+                  </p>
+                  <p className="text-muted text-sm relative z-10 font-light">Register your destination or sanctuary</p>
+                  <p className="text-[10px] uppercase tracking-widest text-gold mt-6 
+                                flex items-center gap-1 group-hover:gap-2 transition-all font-medium relative z-10">
+                    Register Now →
+                  </p>
+                </button>
+              </div>
+
               <PartnerOnboarding />
             </motion.div>
           )}

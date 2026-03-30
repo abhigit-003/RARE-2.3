@@ -28,7 +28,7 @@ export function Footer() {
   return (
     <footer className="bg-dark text-cream pt-20 pb-10 border-t border-gold/15 mt-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 text-center md:text-left">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 text-center md:text-left">
           {/* Brand Blurb */}
           <div className="flex flex-col items-center md:items-start space-y-6">
             <Link to="/" className="inline-block transition-transform duration-500 hover:scale-105">
@@ -54,6 +54,28 @@ export function Footer() {
                   </Link>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Partners */}
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <h4 className="font-playfair text-lg text-rose mb-6 tracking-wide">Partners</h4>
+            <ul className="space-y-4">
+              <li>
+                <Link to="/partner" className="text-muted hover:text-gold transition-colors text-sm font-light">
+                  Partner With Us
+                </Link>
+              </li>
+              <li>
+                <Link to="/partner/seller" className="text-muted hover:text-gold transition-colors text-sm font-light">
+                  Sell on The Edit
+                </Link>
+              </li>
+              <li>
+                <Link to="/partner/destination" className="text-muted hover:text-gold transition-colors text-sm font-light">
+                  List Your Retreat
+                </Link>
+              </li>
             </ul>
           </div>
 

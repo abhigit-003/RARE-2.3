@@ -4,7 +4,7 @@ import {
   Building2, Globe, MapPin, Home, Plane, Calendar, 
   ChevronLeft, UtensilsCrossed, Car, Wifi, Dumbbell, 
   Waves, Wind, BookOpen, HeartPulse, Video, 
-  Phone, Mail, User, Check, Star, DollarSign, Users, Info
+  Phone, Mail, User, Check, Star, IndianRupee, Users, Info
 } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { cn } from '@/lib/utils'
@@ -14,7 +14,7 @@ const DESTINATION_STATS = [
   { icon: Globe,      stat: '32',     label: 'Countries Listed'   },
   { icon: Users,      stat: '12K+',   label: 'Bookings This Year' },
   { icon: Star,       stat: '4.9',    label: 'Avg Stay Rating'    },
-  { icon: DollarSign, stat: '$2.4M',  label: 'Partner Revenue'    },
+  { icon: IndianRupee, stat: '₹18Cr+',  label: 'Partner Revenue'    },
 ]
 
 const STEPS = ['Location', 'Experience', 'Logistics', 'Review']
@@ -472,7 +472,7 @@ export default function DestinationRegisterPage() {
                       Pricing Range (Per person, per night)
                     </label>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {['Budget (< $100)', 'Mid ($100–$300)', 'Luxury ($300–$800)', 'Ultra ($800+)'].map(range => (
+                      {['Budget (< ₹8,000)', 'Mid (₹8,000–₹25,000)', 'Luxury (₹25,000–₹65,000)', 'Ultra (₹65,000+)'].map(range => (
                         <button
                           key={range}
                           onClick={() => setPriceRange(range)}

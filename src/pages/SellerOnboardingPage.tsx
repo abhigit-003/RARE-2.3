@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
   Tag, Calendar, MapPin, Globe, Image as ImageIcon, 
-  Package, X, DollarSign, FlaskConical, Heart, Leaf, 
+  Package, X, IndianRupee, FlaskConical, Heart, Leaf, 
   Sprout, Shield, Sparkles, Recycle, Check, FileText, 
   Info, Users, RefreshCw, Star, ChevronLeft
 } from 'lucide-react'
@@ -358,7 +358,7 @@ export default function SellerOnboardingPage() {
                       Price Positioning
                     </label>
                     <div className="flex flex-wrap gap-3">
-                      {['Accessible (< ₹2K)', 'Mid ($20–$80)', 'Premium ($80–$200)', 'Ultra-Luxury ($200+)'].map(range => (
+                      {['Accessible (< ₹2,000)', 'Mid (₹1,500–₹6,500)', 'Premium (₹6,500–₹16,000)', 'Ultra-Luxury (₹16,000+)'].map(range => (
                         <button
                           key={range}
                           onClick={() => setPricePositioning(range)}
@@ -462,9 +462,9 @@ export default function SellerOnboardingPage() {
                             onChange={(e: any) => updateProduct(product.id, 'category', e.target.value)}
                           />
                           <FormField 
-                            label="Price (USD)" 
-                            icon={DollarSign} 
-                            placeholder="450" 
+                            label="Price (INR)" 
+                            icon={IndianRupee} 
+                            placeholder="3,500" 
                             type="number"
                             value={product.price}
                             onChange={(e: any) => updateProduct(product.id, 'price', e.target.value)}
